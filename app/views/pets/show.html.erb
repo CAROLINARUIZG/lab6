@@ -1,0 +1,28 @@
+<div class="card shadow">
+  <div class="card-body">
+    <h1>Mascota: <%= @pet.name %></h1>
+    <p><strong>Especie:</strong> <%= @pet.species %> | <strong>Raza:</strong> <%= @pet.breed %></p>
+    <p><strong>Fecha Nacimiento:</strong> <%= @pet.birth_date.strftime("%B %d, %Y") %></p>
+    <p><strong>Dueño:</strong> <%= link_to "#{@pet.owner.first_name} #{@pet.owner.last_name}", owner_path(@pet.owner) %></p>
+
+    <h3 class="mt-4">Historial de Citas:</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Veterinario</th>
+          <th>Ver</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pet.appointments.each do |app| %>
+          <tr>
+            <td><%= app.appointment_date.strftime("%d/%m/%Y") %></td>
+            <td><%= app.vet.last_name %></td>
+            <td><%= link_to 'Detalles', appointment_path(app), class: 'btn btn-sm btn-outline-primary' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

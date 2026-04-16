@@ -1,0 +1,33 @@
+<div class="card shadow border-primary">
+  <div class="card-body">
+    <h1>Detalle de la Cita</h1>
+    <hr>
+    <p><strong>Fecha:</strong> <%= @appointment.appointment_date.strftime("%B %d, %Y") %></p>
+    <p><strong>Estado:</strong> <span class="badge bg-success"><%= @appointment.status.to_s.titleize %></span></p>
+    <p><strong>Paciente:</strong> <%= link_to @appointment.pet.name, pet_path(@appointment.pet) %></p>
+    <p><strong>Atendido por:</strong> <%= link_to "Dr. #{@appointment.vet.last_name}", vet_path(@appointment.vet) %></p>
+    <p><strong>Motivo:</strong> <%= @appointment.reason %></p>
+
+    <h3 class="mt-4 text-primary">Tratamientos Aplicados</h3>
+    <table class="table table-bordered table-striped">
+      <thead class="table-light">
+        <tr>
+          <th>Nombre</th>
+          <th>Medicamento</th>
+          <th>Dosis</th>
+          <th>Notas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @appointment.treatments.each do |t| %>
+          <tr>
+            <td><%= t.name %></td>
+            <td><%= t.medication %></td>
+            <td><%= t.dosage %></td>
+            <td><%= t.notes %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="card shadow">
+  <div class="card-body">
+    <h1>Dr. <%= @vet.first_name %> <%= @vet.last_name %></h1>
+    <p><strong>Especialidad:</strong> <%= @vet.specialization %></p>
+    <p><strong>Email:</strong> <%= @vet.email %></p>
+
+    <h3 class="mt-4">Citas Programadas:</h3>
+    <ul class="list-group">
+      <% @vet.appointments.each do |app| %>
+        <li class="list-group-item">
+          <%= app.appointment_date.strftime("%B %d, %Y") %> - Mascota: <%= link_to app.pet.name, pet_path(app.pet) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

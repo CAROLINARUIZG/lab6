@@ -1,0 +1,27 @@
+<h1 class="my-4">Citas Médicas</h1>
+<table class="table table-striped table-hover border shadow-sm">
+  <thead class="table-dark">
+    <tr>
+      <th>Fecha</th>
+      <th>Mascota</th>
+      <th>Veterinario</th>
+      <th>Motivo</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @appointments.each do |app| %>
+      <tr>
+        <td><%= link_to app.appointment_date.strftime("%B %d, %Y"), appointment_path(app) %></td>
+        <td><%= app.pet.name %></td>
+        <td>Dr. <%= app.vet.last_name %></td>
+        <td><%= app.reason %></td>
+        <td>
+          <span class="badge <%= app.status.to_s == 'completed' ? 'bg-success' : 'bg-primary' %>">
+            <%= app.status.to_s.titleize %>
+          </span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
