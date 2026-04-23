@@ -25,9 +25,10 @@
   </head>
 
   <body>
-  <%= render 'layouts/navbar' %>
-  <div class="container mt-4"> 
-  <%= yield %> </div>
-    
+    <%= render 'layouts/navbar' %>
+    <%= render 'layouts/flash' %>
+    <main class="container mt-4">
+      <%= yield %>
+    </main>
   </body>
 </html>
