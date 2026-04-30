@@ -1,20 +1,35 @@
-<h1 class="my-4">Dueños</h1>
+<h1 class="my-4">Owners</h1>
+
+<%= link_to "new owner", new_owner_path, class: "btn btn-primary mb-3 shadow-sm" %>
+
 <table class="table table-striped table-hover border shadow-sm">
   <thead class="table-dark">
     <tr>
-      <th>Nombre Completo</th>
+      <th>Full Name</th>
       <th>Email</th>
-      <th>Teléfono</th>
-      <th>Mascotas</th>
+      <th>Phone</th>
+      <th>Pets</th>
+      <th class="text-center">Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @owners.each do |owner| %>
       <tr>
-        <td><%= link_to "#{owner.first_name} #{owner.last_name}", owner_path(owner), class: "fw-bold text-decoration-none" %></td>
+        <td><%= link_to "#{owner.first_name} #{owner.last_name}", owner_path(owner), class: "fw-bold text-decoration-none text-primary" %></td>
         <td><%= owner.email %></td>
         <td><%= owner.phone %></td>
         <td><span class="badge bg-secondary"><%= owner.pets.count %></span></td>
+        <td class="text-center">
+          <div class="btn-group" role="group">
+            <%# Enlace para Editar %>
+            <%= link_to "Edit", edit_owner_path(owner), class: "btn btn-sm btn-outline-warning" %>
+            
+            <%= button_to "Delete", owner_path(owner), 
+                method: :delete, 
+                data: { turbo_confirm: "Are you sure you want to delete #{owner.first_name}?" }, 
+                class: "btn btn-sm btn-outline-danger" %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>
